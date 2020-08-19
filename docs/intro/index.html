@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Getting Started · SyncState</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="# 🧬 SyncState"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Getting Started · SyncState"/><meta property="og:type" content="website"/><meta property="og:url" content="https://syncstate.github.io/"/><meta property="og:description" content="# 🧬 SyncState"/><meta property="og:image" content="https://syncstate.github.io/img/syncstate-logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://syncstate.github.io/img/syncstate-logo.png"/><link rel="shortcut icon" href="/img/syncstate-logo.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/syncstate-logo.png" alt="SyncState"/><h2 class="headerTitleWithLogo">SyncState</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive siteNavItemActive"><a href="/docs/intro" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Introduction</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/intro">Getting Started</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Basic Guide</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/guide">Basic Guide</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Undo Middleware</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/undo-middleware">Undo Middleware</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Remote</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/remote">Remote</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Getting Started</h1></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="🧬-syncstate"></a><a href="#🧬-syncstate" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>🧬 SyncState</h1>
+<p>SyncState is a <strong>document-based state management library</strong> for JS apps that can power realtime multi-user, offline-first, undoable states across systems.</p>
+<p><strong>Functional &amp; React-way</strong></p>
+<p>JSON patches as actions which can be transferred between the threads and sessions.</p>
+<p><strong>Like Redux, like MobX</strong></p>
+<p>The state is functional but the internal reactivity is based on the MobX approach.</p>
+<p><strong>Versioning</strong> (Optional)</p>
+<p>Undo / Redo middleware that stores the changes (instead of the app state).</p>
+<p><strong>Server</strong>
+(Optional)</p>
+<p>Comes with a bit of server piece that works for conflict resolution.</p>
+<h2><a class="anchor" aria-hidden="true" id="use-it-for-games-or-for-documents"></a><a href="#use-it-for-games-or-for-documents" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use it for games or for documents</h2>
+<p>Battle tested in BuilderX, a realtime collaborative design tool.</p>
+<h2><a class="anchor" aria-hidden="true" id="why-do-i-need-another-state-management-library"></a><a href="#why-do-i-need-another-state-management-library" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why do I need another state management library?</h2>
+<p><a href="https://geekyants.com">We</a> are a big fan of Redux, Recoil, MobX and MobX-State-Tree. Each one of them solve similar problems in their own ways. But, we have realized that building <strong>realtime multi-user</strong> apps requires a bit more effort than storing and retrieving states.</p>
+<p>Like:</p>
+<ul>
+<li>Efficient re-rendering of the mounted components.</li>
+<li>Data syncing between threads &amp; sessions.</li>
+<li>Conflict resolution between multiple sessions.</li>
+<li>Local History (Undo / Redo) &amp; Remote History (Versioning).</li>
+<li>Standard replay-able actions over custom actions.</li>
+<li>Optimistic updates and reversal when invalid.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="highlights"></a><a href="#highlights" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Highlights</h2>
+<ul>
+<li>SyncState is based on Redux that uses JSON patches for actions.</li>
+<li>Also, it doesn't use <code>connect()</code> to connect state to React components, it's based on events (actions) for greater performance. It uses a <code>useDoc()</code> hook that listens to the updates on the <code>path</code> (<a href="https://twitter.com/kentcdodds/status/1180157212485771264">push strategy</a>) that the component is listening to and forces an update. (like Recoil).</li>
+<li>We don't pass down states to components but use paths instead. It works like an ID that can be used to re-render the components. It also helps in not maintaining <code>index</code> with actions like Redux.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="when-to-use-it"></a><a href="#when-to-use-it" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>When to use it?</h2>
+<p>If you are building a realtime document based app like Google Docs or Figma, SyncState can help solve a lot of your problems.</p>
+<h2><a class="anchor" aria-hidden="true" id="can-i-use-syncstate-for-general-purpose-apps"></a><a href="#can-i-use-syncstate-for-general-purpose-apps" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Can I use SyncState for general purpose apps?</h2>
+<p>Yes, you can use it for general purpose state management. It only helps to adopt realtime and multi-user capabilities at a later stage.</p>
+<h1><a class="anchor" aria-hidden="true" id="comparison-with-redux"></a><a href="#comparison-with-redux" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Comparison with Redux</h1>
+<ul>
+<li>SyncState uses <code>Redux</code> but doesn't use <code>react-redux</code></li>
+<li>We store patches (or actions) along with the state in the global store.</li>
+</ul>
+<pre><code class="hljs css language-jsx">{
+    <span class="hljs-attr">doc</span>: {},
+    <span class="hljs-attr">patches</span>: []
+}
+</code></pre>
+<ul>
+<li>State can be computed by applying the series of patches.</li>
+<li>We pass down <code>paths</code> instead of a part of the <code>state</code></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="no-react-redux"></a><a href="#no-react-redux" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>No react-redux</h3>
+<ul>
+<li>SyncState doesn't use <code>react-redux</code> and it's <code>connect()</code> method, mainly to achieve higher performance. <code>connect()</code> method is always executed on the mounted components even if the component doesn't need a re-render. There are techniques to make the <code>connect()</code> method performant with <code>selection</code> and <code>caching</code> but the underlying philosophy remains the same.</li>
+</ul>
+<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fb977490-f45e-4369-8134-7c9b6a905a79/Untitled.png" alt="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fb977490-f45e-4369-8134-7c9b6a905a79/Untitled.png"></p>
+<ul>
+<li>SyncState uses Redux but the re-renders are based on <strong>push-based state management</strong> like MobX.</li>
+</ul>
+<h1><a class="anchor" aria-hidden="true" id="comparison-with-recoil"></a><a href="#comparison-with-recoil" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Comparison with Recoil</h1>
+<ul>
+<li>Uses the performant re-renders like Recoil. Recoil works on ID whereas SyncState works on Document Paths.</li>
+</ul>
+<h1><a class="anchor" aria-hidden="true" id="comparison-with-mobx--mst"></a><a href="#comparison-with-mobx--mst" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Comparison with MobX &amp; MST</h1>
+<ul>
+<li>Uses the performant re-renders like MobX.</li>
+<li>It's not directly mutable like MobX &amp; MST but the same can be easily achieved here with the usage of Immer.js because Immer generates patches along with the next state. SyncState needs patches to generate the next state and emit the same to the connected sessions.</li>
+</ul>
+<h1><a class="anchor" aria-hidden="true" id="getting-started"></a><a href="#getting-started" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting started</h1>
+<pre><code class="hljs css language-jsx">npm install @syncstate/core --save
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/docs/guide"><span>Basic Guide</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#use-it-for-games-or-for-documents">Use it for games or for documents</a></li><li><a href="#why-do-i-need-another-state-management-library">Why do I need another state management library?</a></li><li><a href="#highlights">Highlights</a></li><li><a href="#when-to-use-it">When to use it?</a></li><li><a href="#can-i-use-syncstate-for-general-purpose-apps">Can I use SyncState for general purpose apps?</a><ul class="toc-headings"><li><a href="#no-react-redux">No react-redux</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/syncstate-logo.png" alt="SyncState" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/intro.html">Getting Started</a><a href="/docs/guide">Basic Guide</a><a href="/docs/undo-middleware">Undo Middleware</a><a href="/docs/remote">Remote</a></div><div><h5>Community</h5><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a target="_blank" href="https://github.com/syncstate" rel="noreferrer noopener">GitHub</a></div><div><a href="https://geekyants.com/" target="_blank" rel="noreferrer noopener">Built with ❤️ at GeekyAnts.</a></div></section><section class="copyright" style="margin-bottom:20px"></section><section class="copyright">Copyright © 2020 SyncState</section></footer></div></body></html>
