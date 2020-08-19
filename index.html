@@ -1,0 +1,652 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>🧬 SyncState</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e1476b10-ad91-4fa8-8efb-e0ea5597416b" class="page sans"><header><h1 class="page-title">🧬 SyncState</h1></header><div class="page-body"><p id="09e1330c-df84-4b38-9f30-1b7dd08a0fe2" class="">SyncState is a <strong>document-based state management library</strong> for JS apps that can power realtime multi-user, offline-first, undoable states across systems.</p><p id="9f6becec-bb65-4781-b7da-b2400e254a22" class="">
+</p><div id="531c8893-a49f-48af-a030-309554b9d6e8" class="column-list"><div id="2bc33f97-3dc6-4d19-90c3-07c818347ea3" style="width:28.125%" class="column"><p id="f9f1a5e6-9344-4ccd-8845-1223058db519" class=""><strong>Functional &amp; React-way</strong></p><p id="ae37ce17-b2b7-4cc5-af91-0ec31347e44d" class="">JSON patches as actions which can be transferred between the threads and sessions.</p></div><div id="5d0ee512-25dd-4564-b231-009a6a0f18ea" style="width:25%" class="column"><p id="088fd818-4e44-4c3a-8f40-8f62d52d494a" class=""><strong>Like Redux, like MobX</strong></p><p id="1b4b45c0-b016-46c3-b4a5-2ffd74f38a62" class="">The state is functional but the internal reactivity is based on the MobX approach.</p></div><div id="0c9c8696-a593-4444-bd74-6de4c79860cf" style="width:21.874999999999993%" class="column"><p id="40857c0f-cd2b-4fd6-a4c2-415ede8e12ad" class=""><strong>Versioning </strong>(Optional)</p><p id="deb18aff-3afd-459c-bb4d-a071d24263b8" class="">Undo / Redo middleware that stores the changes (instead of the app state).</p><p id="d31849ff-1c06-4ff0-aee2-283e8430802a" class="">
+</p></div><div id="6844e82e-699c-464c-9473-e88b165f061c" style="width:25%" class="column"><p id="b0c3e076-d1b7-438c-9ee5-f683a5f4a27b" class=""><strong>Server
+</strong>(Optional)</p><p id="94852a38-b767-42c7-8e66-7d50d523b15f" class="">Comes with a bit of server piece that works for conflict resolution.</p><p id="1db4a64e-2b90-4c77-a96c-ca4985a1890d" class="">
+</p></div></div><h2 id="c3088d82-0b28-4934-ae2f-0364291b54a1" class="">Use it for games or for documents</h2><p id="4f242131-e2a0-40d4-9a4b-46a30c7a09d8" class="">Battle tested in BuilderX, a realtime collaborative design tool.</p><p id="2d558539-9d5d-43cb-9269-c0cace482337" class="">
+</p><h2 id="3932e0e8-85c6-417d-8ebc-286e93d8cc04" class="">Why do I need another state management library?</h2><p id="9d2bac03-0719-45d8-aa78-4f609bbe660f" class=""><a href="https://geekyants.com">We</a> are a big fan of Redux, Recoil, MobX and MobX-State-Tree. Each one of them solve similar problems in their own ways. But, we have realized that building <strong>realtime multi-user</strong> apps requires a bit more effort than storing and retrieving states.</p><p id="bb24e7d8-982b-41f9-bc0c-cfb885876bfc" class="">
+</p><p id="ec0bdd64-f6c2-46b4-a1a7-9a57cc3731f3" class="">Like:</p><ul id="d3a01277-c80c-4316-a366-087dd919d659" class="bulleted-list"><li>Efficient re-rendering of the mounted components.</li></ul><ul id="6709fdba-1175-4c5d-b88c-d2b934ce53fa" class="bulleted-list"><li>Data syncing between threads &amp; sessions.</li></ul><ul id="f30eca8f-b4a6-4623-9cc5-6a62b4697687" class="bulleted-list"><li>Conflict resolution between multiple sessions.</li></ul><ul id="a9548ec9-b4ae-4874-9fa7-c49302517c48" class="bulleted-list"><li>Local History (Undo / Redo) &amp; Remote History (Versioning).</li></ul><ul id="d84a1d52-9415-4f19-974a-dc318e6dce18" class="bulleted-list"><li>Standard replay-able actions over custom actions.</li></ul><ul id="19f9e1fb-58e1-40cb-8b4d-6fedf6350c42" class="bulleted-list"><li>Optimistic updates and reversal when invalid.</li></ul><p id="6b30a62f-1967-4fcf-9856-8ecb5acd3199" class="">
+</p><h2 id="02bc1b3a-b991-412e-a6f9-04205978330e" class="">Highlights</h2><ul id="b21fbc7c-21b3-492c-a006-97c0357c51c0" class="bulleted-list"><li>SyncState is based on Redux that uses JSON patches for actions.</li></ul><ul id="2332c4cd-af81-48df-89dd-6fa2947842be" class="bulleted-list"><li>Also, it doesn&#x27;t use <code>connect()</code> to connect state to React components, it&#x27;s based on events (actions) for greater performance. It uses a <code>useDoc()</code>  hook that listens to the updates on the <code>path</code>  (<a href="https://twitter.com/kentcdodds/status/1180157212485771264">push strategy</a>) that the component is listening to and forces an update. (like Recoil).</li></ul><ul id="8125fc63-8ee6-4ac0-8940-03934c22b75e" class="bulleted-list"><li>We don&#x27;t pass down states to components but use paths instead. It works like an ID that can be used to re-render the components. It also helps in not maintaining <code>index</code> with actions like Redux.</li></ul><p id="ff9299ee-9eb5-40a3-9bcc-9f569d6a9680" class="">
+</p><h2 id="80484b2e-b54e-447e-92ca-92e1457596b1" class="">When to use it?</h2><p id="f1955acb-1428-4aca-a955-0f6746363e9c" class="">If you are building a realtime document based app like Google Docs or Figma, SyncState can help solve a lot of your problems.</p><h2 id="650ed5cd-ec57-422d-9d47-8c42340ae7d6" class="">Can I use SyncState for general purpose apps?</h2><p id="61cf976e-d6e3-465f-a9ab-13d1bb5893ba" class="">Yes, you can use it for general purpose state management. It only helps to adopt realtime and multi-user capabilities at a later stage.</p><p id="fed47f19-fe57-44f0-9d7a-47dadbfa3e1a" class="">
+</p><h1 id="bde8703c-18cb-4a22-81ee-836f878ce33a" class="">Comparison with Redux</h1><ul id="c56bbde9-ede6-4c59-b214-85c26eaf6b62" class="bulleted-list"><li>SyncState uses <code>Redux</code> but doesn&#x27;t use <code>react-redux</code></li></ul><ul id="f53127de-578b-4fe5-ba4d-ab86dd66ec76" class="bulleted-list"><li>We store patches (or actions) along with the state in the global store.</li></ul><pre id="192b2988-391b-47b5-a34e-c7f0ae908ea2" class="code"><code>{
+    doc: {},
+    patches: []
+}</code></pre><ul id="cd1b070a-dc1c-4ed5-9e75-13efbb293d6a" class="bulleted-list"><li>State can be computed by applying the series of patches.</li></ul><ul id="445afbce-0215-40c2-9bc1-5465dd3f3a21" class="bulleted-list"><li>We pass down <code>paths</code> instead of a part of the <code>state</code></li></ul><p id="de6c4721-0322-4249-9e58-ee2a4362d2e0" class="">
+</p><h3 id="af1adbe9-b44c-439a-a62c-9107a0fe2bb0" class="">No react-redux</h3><ul id="4c768525-2235-49d3-a428-4605b7a11984" class="bulleted-list"><li>SyncState doesn&#x27;t use <code>react-redux</code> and it&#x27;s <code>connect()</code> method, mainly to achieve higher performance. <code>connect()</code> method is always executed on the mounted components even if the component doesn&#x27;t need a re-render. There are techniques to make the <code>connect()</code> method performant with <code>selection</code> and <code>caching</code> but the underlying philosophy remains the same. 
+</li></ul><figure id="ccf7bf51-670d-4d9e-8455-379d2342fe6e" class="image"><a href="%F0%9F%A7%AC%20SyncState%20ccf7bf51670d4d9e8455379d2342fe6e/Untitled.png"><img style="width:1206px" src="%F0%9F%A7%AC%20SyncState%20ccf7bf51670d4d9e8455379d2342fe6e/Untitled.png"/></a></figure><p id="f95bd146-4357-4ee5-97fa-4af45596c219" class="">
+</p><ul id="0ac93f14-46e0-4cb0-928c-77beb673adbc" class="bulleted-list"><li>SyncState uses Redux but the re-renders are based on <strong>push-based state management </strong>like MobX.</li></ul><h1 id="42bd174b-4eac-4d7f-b53c-5c6080bb6784" class="">Comparison with Recoil</h1><ul id="d71a1612-dce0-4ffa-988e-29c4421ca249" class="bulleted-list"><li>Uses the performant re-renders like Recoil. Recoil works on ID whereas SyncState works on Document Paths.</li></ul><p id="7665aca5-c1b5-481e-9b81-15a805cfb4fe" class="">
+</p><h1 id="d4e26c92-699a-48b9-bfad-0f08e09131ca" class="">Comparison with MobX &amp; MST</h1><ul id="16d27b4b-6221-4a39-a4ca-c6c250f0aab2" class="bulleted-list"><li>Uses the performant re-renders like MobX.</li></ul><ul id="46cd23bb-edd6-4ec9-9697-b32fd8a16c2b" class="bulleted-list"><li>It&#x27;s not directly mutable like MobX &amp; MST but the same can be easily achieved here with the usage of Immer.js because Immer generates patches along with the next state. SyncState needs patches to generate the next state and emit the same to the connected sessions.</li></ul><p id="9524a467-bd39-4546-8a1f-19f290983be3" class="">
+</p><p id="f87da55d-da34-4012-a983-6f668d5b518d" class="">
+</p><p id="17261db1-ae6a-4028-b95d-399f3d1ef934" class="">
+</p><h1 id="258cdc43-ec54-4744-bfe0-3d50d9b9d9a4" class="">Getting started</h1><pre id="cfd8a683-6317-4e41-9cc0-c018d3b5a027" class="code"><code>npm install @syncstate/core --save</code></pre><p id="8b56b376-ab26-4e05-bd40-adababd81392" class="">
+</p><p id="17e9c047-b85d-49dc-9976-304995b967a7" class="">
+</p><h1 id="54f0de6f-e9d4-4354-9945-d82322c47e62" class="">Basic use-case</h1><pre id="5c19f72b-1664-4fbe-af12-ebce5b4ed4c5" class="code"><code></code></pre><p id="38bb0969-7b54-4257-8fd7-2e0392174d73" class="">
+</p><h1 id="de05cb2b-b5a1-4102-83cb-02dc4c10cede" class="">Middlewares</h1><figure id="99675174-37f5-4fb2-a3b1-b5b2cfa61587" class="link-to-page"><a href="%F0%9F%A7%AC%20SyncState%20ccf7bf51670d4d9e8455379d2342fe6e/Undo%20Middleware%209967517437f54fb2a3b1b5b2cfa61587.html">Undo Middleware</a></figure><ul id="d54afcf8-f80b-477f-b7ee-24564e58a686" class="bulleted-list"><li>REST middleware<ul id="4064edb4-d671-409d-83ce-624f9f6918e4" class="toggle"><li><details open=""><summary>Connect the document to REST endpoints.</summary></details></li></ul></li></ul><ul id="3f27dd93-f183-4a56-ad6a-22b3da4ad6bf" class="bulleted-list"><li>GraphQL<ul id="8bda8fd6-d590-40df-b6c5-9be3614adc2d" class="toggle"><li><details open=""><summary>Use the GraphQL middleware to save / retrieve states from GraphQL enpoint</summary></details></li></ul></li></ul><ul id="b09aef7c-0b37-49dd-83c5-2fd3e4c334cd" class="bulleted-list"><li>Socket<ul id="87722671-a8e3-4eb3-8202-4f9c288f03a2" class="toggle"><li><details open=""><summary>...</summary></details></li></ul><p id="554fc5c7-94f5-4903-918d-6e4d952ac1c9" class="">
+</p><p id="08aaa3bf-2b9e-43d8-92bf-55b7cd2e7f2e" class="">
+</p><p id="165c8237-5f95-4ba7-aa0f-adf34252ac5b" class="">
+</p></li></ul><p id="2ec371be-77cd-4aa9-a71d-e8f7163858c2" class="">Built with ❤️ at GeekyAnts.</p><p id="b517a2d8-898f-4953-9a22-80463d9cbdef" class=""><strong>Author:</strong> Sanket Sahu, Himanshu Satija &amp; Rohit Singh</p></div></article></body></html>
