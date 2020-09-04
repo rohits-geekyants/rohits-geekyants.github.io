@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>History · SyncState</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`[@syncstate/history](https://github.com/syncstate/history)` is a SyncState plugin which provides Undo and Redo functionality out of the box."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="History · SyncState"/><meta property="og:type" content="website"/><meta property="og:url" content="https://syncstate.github.io/"/><meta property="og:description" content="`[@syncstate/history](https://github.com/syncstate/history)` is a SyncState plugin which provides Undo and Redo functionality out of the box."/><meta property="og:image" content="https://syncstate.github.io/img/SyncStateLogoWithBackground.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://syncstate.github.io/img/SyncStateLogoWithBackground.png"/><link rel="shortcut icon" href="/img/SyncStateLogoWithBackground.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/agate.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="/js/custom.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/SyncStateLogoWhite.svg" alt="SyncState"/><h2 class="headerTitleWithLogo">SyncState</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started" target="_self">Docs</a></li><li class=""><a href="https://github.com/syncstate/core" target="_self">Github</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Plugins</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/getting-started">Getting started</a></li><li class="navListItem"><a class="navItem" href="/docs/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/motivation">Motivation</a></li><li class="navListItem"><a class="navItem" href="/docs/core-concepts">Core Concepts</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Recipes</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/recipes">Recipes</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Examples</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/counter-example">Counter</a></li><li class="navListItem"><a class="navItem" href="/docs/counter-with-redo-undo-example">Counter with Undo / Redo</a></li><li class="navListItem"><a class="navItem" href="/docs/todo-app-example">Todo app</a></li><li class="navListItem"><a class="navItem" href="/docs/multi-user-counter-example">Multi User Counter</a></li><li class="navListItem"><a class="navItem" href="/docs/multi-user-todo-example">Multi User Todo</a></li><li class="navListItem"><a class="navItem" href="/docs/multi-user-todo-example-with-undo-redo">Multi User Todo with Undo/Redo</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Plugins</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/history-plugin">History</a></li><li class="navListItem"><a class="navItem" href="/docs/remote-plugin">Remote</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API Reference</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/api-ref">API Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/create-doc">createDocStore</a></li><li class="navListItem"><a class="navItem" href="/docs/store">Store</a></li><li class="navListItem"><a class="navItem" href="/docs/provider">Provider</a></li><li class="navListItem"><a class="navItem" href="/docs/use-doc">useDoc</a></li><li class="navListItem"><a class="navItem" href="/docs/use-syncstate">useSyncState</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tips &amp; Tricks</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/common-pitfalls">Common Pitfalls &amp; Best Practices</a></li><li class="navListItem"><a class="navItem" href="/docs/noreact">Using SyncState without React</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">History</h1></header><article><div><span><p><code>[@syncstate/history](https://github.com/syncstate/history)</code> is a SyncState plugin which provides Undo and Redo functionality out of the box.</p>
+<h2><a class="anchor" aria-hidden="true" id="installation"></a><a href="#installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
+<pre><code class="hljs css language-bash"><span class="hljs-comment"># NPM</span>
+npm install @syncstate/<span class="hljs-built_in">history</span> --save
+
+<span class="hljs-comment"># Yarn</span>
+yarn add @syncstate/<span class="hljs-built_in">history</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="basic-usage"></a><a href="#basic-usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Basic usage</h2>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> { createDocStore } <span class="hljs-keyword">from</span> <span class="hljs-string">"@syncstate/syncstate"</span>;
+<span class="hljs-keyword">import</span> history <span class="hljs-keyword">from</span> <span class="hljs-string">"@syncstate/history"</span>;
+
+<span class="hljs-keyword">const</span> store = createDocStore({ <span class="hljs-attr">todos</span>: [], <span class="hljs-attr">filter</span>: <span class="hljs-string">"all"</span> }, [
+    history.createInitializer(),
+]);
+
+<span class="hljs-comment">// Undo last applied JSON patch</span>
+store.dispatch(history.undo());
+<span class="hljs-comment">// Redo next JSON patch from redo stack</span>
+store.dispatch(history.redo());
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="breakpoints"></a><a href="#breakpoints" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Breakpoints</h3>
+<p>You have the option of inserting breakpoints in the history using which you can undo till a specific point in state.</p>
+<pre><code class="hljs css language-tsx"><span class="hljs-comment">// User actions before breakpoint</span>
+
+store.dispatch<span class="hljs-comment">(history.insertUndoBreakpoint()</span>);
+
+<span class="hljs-comment">// User actions after breakpoint</span>
+
+<span class="hljs-comment">// This will undo all actions after breakpoint</span>
+store.dispatch<span class="hljs-comment">(history.undoTillBreakpoint()</span>);
+
+<span class="hljs-comment">// This will redo all actions after breakpoint</span>
+store.dispatch<span class="hljs-comment">(history.redoTillBreakpoint()</span>);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="advanced"></a><a href="#advanced" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advanced</h3>
+<p>By default, this plugin will automatically work for the root document which means any change to the document is recorded and performing undo or redo actions will work with those changes.</p>
+<p>If you want to maintain separate undo/redo stack for different parts of the document, you can use <code>history.enable</code> for a path inside document.</p>
+<pre><code class="hljs css language-tsx">store.dispatch(history.enable(<span class="hljs-string">"/todos"</span>))<span class="hljs-comment">;</span>
+
+store.dispatch(history.undoPath(<span class="hljs-string">"/todos"</span>))<span class="hljs-comment">;</span>
+store.dispatch(history.redoPath(<span class="hljs-string">"/todos"</span>))<span class="hljs-comment">;</span>
+
+store.dispatch(history.insertUndoBreakpoint(<span class="hljs-string">"/todos"</span>))<span class="hljs-comment">;</span>
+
+store.dispatch(history.undoPathTillBreakpoint(<span class="hljs-string">"/todos"</span>))<span class="hljs-comment">;</span>
+store.dispatch(history.redoPathTillBreakpoint(<span class="hljs-string">"/todos"</span>))<span class="hljs-comment">;</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="how-it-works"></a><a href="#how-it-works" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How it works</h2>
+<ul>
+<li>SyncState stores <code>inversePatches</code> which means the opposite of <code>patches</code> generated against user actions. An inversePatch can be applied to reverse the operation of a corresponding patch.</li>
+<li>SyncState history plugin adds a middleware to SyncState's internal Redux store and listens to changes and stores patches and inversePatches in an undo stack. It also maintains a redo stack.</li>
+<li>To Undo and Redo, it simply picks up the patches from Undo and Redo stacks and applied them to SyncState store.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="differences-with-redux-undo"></a><a href="#differences-with-redux-undo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Differences with redux-undo</h2>
+<ul>
+<li>It doesn't replace with the entire snapshot of the app. Instead it applies a patch on the document from the Undo / Redo stack.</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/multi-user-todo-example-with-undo-redo"><span class="arrow-prev">← </span><span>Multi User Todo with Undo/Redo</span></a><a class="docs-next button" href="/docs/remote-plugin"><span>Remote</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#installation">Installation</a></li><li><a href="#basic-usage">Basic usage</a><ul class="toc-headings"><li><a href="#breakpoints">Breakpoints</a></li><li><a href="#advanced">Advanced</a></li></ul></li><li><a href="#how-it-works">How it works</a></li><li><a href="#differences-with-redux-undo">Differences with redux-undo</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div><h5>Docs</h5><a href="/docs/getting-started">Getting Started</a><a href="/docs/counter-example">Examples</a><a href="/docs/history-plugin">Plugins</a><a href="/docs/api-ref">API Reference</a></div><div><h5>Community</h5><a href="https://twitter.com/geekyants" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a target="_blank" href="https://github.com/syncstate/core" rel="noreferrer noopener">GitHub</a><a target="_blank" href="https://github.com/syncstate/core/blob/master/CONTRIBUTING.md" rel="noreferrer noopener">Contribution Guidelines</a></div><div><a href="https://geekyants.com/" target="_blank" rel="noreferrer noopener">Built with ❤️ at GeekyAnts.</a></div></section><section class="copyright" style="margin-bottom:20px"></section><section class="copyright">Copyright © 2020 SyncState</section></footer></div></body></html>
